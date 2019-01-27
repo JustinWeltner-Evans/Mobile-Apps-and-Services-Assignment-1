@@ -23,6 +23,7 @@ public class SnakeGamePanel extends AbstractGamePanel {
 
 	@Override
 	public void onStart() {
+
 		this.snake = new SnakeActor(100, 100);
 		this.apple = new AppleActor(200, 50);
 		this.score = new ScoreBoard(this);
@@ -54,7 +55,9 @@ public class SnakeGamePanel extends AbstractGamePanel {
 //			p.setTextSize(50);
 //			p.setColor(Color.BLACK);
 //			canvas.drawText("Game over!", 100, 100, p);
-			getContext().startActivity(new Intent(getContext(), GameOver.class));
+			//Game over! Snake hit bounds
+			stopGameLoop();
+			getContext().startActivity(new Intent(getContext(), GameOverActivity.class));
 		}
 	}
 

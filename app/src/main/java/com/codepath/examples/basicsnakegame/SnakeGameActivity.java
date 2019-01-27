@@ -13,6 +13,7 @@ public class SnakeGameActivity extends simplegame.GameActivity {
         setTheme(R.style.AppTheme);
 
 		switchFullscreen();
+		setContentView(R.layout.activity_game);
 		setContentView(new SnakeGamePanel(this));
 	}
 }
