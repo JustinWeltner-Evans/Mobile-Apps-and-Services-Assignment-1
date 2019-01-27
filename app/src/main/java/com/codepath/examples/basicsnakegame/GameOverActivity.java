@@ -13,18 +13,27 @@ public class GameOverActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameover);
 
-        configurePlayAgain();
+        configureButtons();
     }
 
     /**
-     * Allows the player to restart the game after getting game over.
+     * Allows the player to restart the game after getting game over and view
+     * high score list.
      */
-    private void configurePlayAgain() {
+    private void configureButtons() {
         Button playAgain = (Button) findViewById(R.id.playAgain);
         playAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(GameOverActivity.this, SnakeGameActivity.class));
+            }
+        });
+
+        Button viewScores = (Button) findViewById(R.id.scoreList);
+        viewScores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GameOverActivity.this, HighScoreListActivity.class));
             }
         });
 
