@@ -51,10 +51,6 @@ public class SnakeGamePanel extends AbstractGamePanel {
 			this.apple.draw(canvas);
 			this.score.draw(canvas);
 		} else {
-//			Paint p = getPaint();
-//			p.setTextSize(50);
-//			p.setColor(Color.BLACK);
-//			canvas.drawText("Game over!", 100, 100, p);
 			//Game over! Snake hit bounds
 			stopGameLoop();
 			getContext().startActivity(new Intent(getContext(), GameOverActivity.class));

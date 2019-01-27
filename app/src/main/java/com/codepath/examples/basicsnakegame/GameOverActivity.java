@@ -16,6 +16,9 @@ public class GameOverActivity extends Activity {
         configurePlayAgain();
     }
 
+    /**
+     * Allows the player to restart the game after getting game over.
+     */
     private void configurePlayAgain() {
         Button playAgain = (Button) findViewById(R.id.playAgain);
         playAgain.setOnClickListener(new View.OnClickListener() {
