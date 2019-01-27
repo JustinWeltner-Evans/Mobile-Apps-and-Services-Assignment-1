@@ -10,6 +10,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.app.ListActivity;
 
+/**
+ * https://examples.javacodegeeks.com/android/core/app/listactivity/android-listactivity-example/
+ */
+
 public class HighScoreListActivity extends ListActivity {
 
     private TextView text;
