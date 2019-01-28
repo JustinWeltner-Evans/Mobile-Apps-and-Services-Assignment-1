@@ -26,17 +26,11 @@ public class HighScoreListActivity extends ListActivity {
 
         text = (TextView) findViewById(R.id.mainText);
 
-        listValues = new ArrayList<String>();
-        listValues.add("jj: 600");
-        listValues.add("secondPlace: 500");
-        listValues.add("mp: 450");
-        listValues.add("hello: 450");
-        listValues.add("meow: 400");
-        listValues.add("mprouty: 300");
-        listValues.add("frisco: 250");
-        listValues.add("justin: 200");
-        listValues.add("bob: 150");
-        listValues.add("alice: 100");
+        //Initialize the high score list
+        if (!HighScoreList.isPopulated()) {
+            HighScoreList.populateList();
+        }
+        listValues = HighScoreList.convertToStringList();
 
         // initiate the listadapter
         ArrayAdapter<String> myAdapter = new ArrayAdapter <String>(this,
