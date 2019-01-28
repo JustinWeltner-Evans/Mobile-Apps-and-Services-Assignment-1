@@ -9,28 +9,29 @@ import java.util.ArrayList;
 
 public class HighScoreList {
 
-    private static List<String[]> highScoreList = new ArrayList<>();
-    private static final int MAX_SIZE = 10;
+    private static List<Player> highScoreList = new ArrayList<>();
+    private static final int MAX_SIZE = 12;
     private static boolean hasBeenPopulated = false;
     private static String currUsername = "";
     private static int currScore = 0;
+    private static int numPlayer = 1;
 
     /**
-     * Populates the high score list with default data in format:
-     * String[0] = username
-     * String[1] = score.
+     * Populates the high score list with default players.
      */
     public static void populateList() {
-        highScoreList.add(new String[]{"jj", "600"});
-        highScoreList.add(new String[]{"secondPlace", "500"});
-        highScoreList.add(new String[]{"mp", "450"});
-        highScoreList.add(new String[]{"hello", "450"});
-        highScoreList.add(new String[]{"meow", "400"});
-        highScoreList.add(new String[]{"mprouty", "300"});
-        highScoreList.add(new String[]{"frisco", "250"});
-        highScoreList.add(new String[]{"justin", "200"});
-        highScoreList.add(new String[]{"bob", "150"});
-        highScoreList.add(new String[]{"alice", "100"});
+        highScoreList.add(new Player(numPlayer++, "jj", 600));
+        highScoreList.add(new Player(numPlayer++, "secondPlace", 500));
+        highScoreList.add(new Player(numPlayer++, "mp", 450));
+        highScoreList.add(new Player(numPlayer++, "hello", 450));
+        highScoreList.add(new Player(numPlayer++, "meow", 400));
+        highScoreList.add(new Player(numPlayer++, "mprouty", 300));
+        highScoreList.add(new Player(numPlayer++, "frisco", 250));
+        highScoreList.add(new Player(numPlayer++, "justin", 200));
+        highScoreList.add(new Player(numPlayer++, "bob", 150));
+        highScoreList.add(new Player(numPlayer++, "caleb", 100));
+        highScoreList.add(new Player(numPlayer++, "maddie", 50));
+        highScoreList.add(new Player(numPlayer++, "alice", 50));
         hasBeenPopulated = true;
     }
 
@@ -48,24 +49,33 @@ public class HighScoreList {
      */
     public static void addNewHighScore() {
         for (int i = 0; i < MAX_SIZE; i++) {
-            int score = Integer.parseInt(highScoreList.get(i)[1]);
+            int score = highScoreList.get(i).getScore();
             if (currScore > score) {
-                highScoreList.add(i, new String[]{currUsername, Integer.toString(currScore)});
+                highScoreList.add(i, new Player(numPlayer++, currUsername, currScore));
+                highScoreList.remove(MAX_SIZE);
                 break;
             }
         }
-        highScoreList.remove(MAX_SIZE);
     }
 
+    /**
+     * Update the current score to the most recently played score.
+     * @param score The score from the last game of Snake.
+     */
     public static void updateCurrentScore(int score) {
-        currUsername = "mprouty";
+        currUsername = "freddie";
         currScore = score;
     }
 
+    /**
+     * Converts the high score list to a list of Strings for the ListView.
+     * @return the list of Strings representing the high scores for each username
+     * and score combination.
+     */
     public static List<String> convertToStringList() {
         List<String> listValues = new ArrayList<>();
         for (int i = 0; i < MAX_SIZE; i++) {
-            listValues.add(highScoreList.get(i)[0] + ": " + highScoreList.get(i)[1]);
+            listValues.add(highScoreList.get(i).toString());
         }
         return listValues;
     }

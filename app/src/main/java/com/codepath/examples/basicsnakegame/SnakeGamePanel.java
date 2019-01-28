@@ -51,7 +51,9 @@ public class SnakeGamePanel extends AbstractGamePanel {
 			this.apple.draw(canvas);
 			this.score.draw(canvas);
 		} else {
-			//Game over! Snake hit bounds
+			//Game over! Send score to model to see if it makes high score list and
+			//transition to game over screen.
+			HighScoreList.updateCurrentScore(this.score.getScore());
 			stopGameLoop();
 			getContext().startActivity(new Intent(getContext(), GameOverActivity.class));
 		}
