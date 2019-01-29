@@ -1,5 +1,8 @@
 package com.codepath.examples.basicsnakegame;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -15,7 +18,7 @@ public class HighScoreList {
     private static String currUsername = "";
     private static int currScore = 0;
     private static int numPlayer = 1;
-
+    //private DatabaseReference mDatabase;
     /**
      * Populates the high score list with default players.
      */
@@ -51,12 +54,21 @@ public class HighScoreList {
         for (int i = 0; i < MAX_SIZE; i++) {
             int score = highScoreList.get(i).getScore();
             if (currScore > score) {
-                highScoreList.add(i, new Player(numPlayer++, currUsername, currScore));
+
+                Player newPlayer = new Player(numPlayer++, currUsername, currScore);
+                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference player = mDatabase.child("Player");
+                player.push().setValue(newPlayer);
+
+                highScoreList.add(i,newPlayer);
                 highScoreList.remove(MAX_SIZE);
                 break;
             }
         }
+
     }
+
+
 
     /**
      * Update the current score to the most recently played score.

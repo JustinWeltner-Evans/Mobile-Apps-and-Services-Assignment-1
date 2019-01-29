@@ -10,6 +10,9 @@ public class Player {
     private String name;
     private int score;
 
+    //needed for Firebase
+    public Player() {}
+
     public Player(int n, String name, int score) {
         this.id = n;
         this.name = name;

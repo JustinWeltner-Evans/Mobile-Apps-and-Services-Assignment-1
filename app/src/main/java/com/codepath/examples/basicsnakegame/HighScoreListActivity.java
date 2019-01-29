@@ -12,6 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.app.ListActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * https://examples.javacodegeeks.com/android/core/app/listactivity/android-listactivity-example/
  */
@@ -21,10 +24,16 @@ public class HighScoreListActivity extends ListActivity {
     private TextView text;
     private List<String> listValues;
 
+    private DatabaseReference mDatabase;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_high_score_list);
+
+        //gets root reference
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         text = (TextView) findViewById(R.id.mainText);
 
@@ -35,6 +44,7 @@ public class HighScoreListActivity extends ListActivity {
 
         //Add the new score to the high score list if it makes the cut
         HighScoreList.addNewHighScore();
+
         listValues = HighScoreList.convertToStringList();
 
         // initiate the listadapter
