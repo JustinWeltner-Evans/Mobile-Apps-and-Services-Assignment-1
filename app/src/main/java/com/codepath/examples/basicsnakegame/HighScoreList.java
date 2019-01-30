@@ -20,7 +20,7 @@ public class HighScoreList {
     private static List<Player> highScoreList = new ArrayList<>();
     private static final int MAX_SIZE = 12;
     private static boolean hasBeenPopulated = false;
-    private static String currUsername = "";
+    static String currUsername = "";
     private static int currScore = 0;
     private static int numPlayer = 1;
     private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();

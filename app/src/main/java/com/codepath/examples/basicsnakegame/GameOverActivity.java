@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.EditText;
+import android.text.TextWatcher;
+import android.text.Editable;
 
 public class GameOverActivity extends Activity {
 
@@ -13,6 +16,25 @@ public class GameOverActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameover);
 
+        EditText editText = findViewById(R.id.username);
+        editText.addTextChangedListener(new TextWatcher() {
+
+            // the user's changes are saved here
+            public void onTextChanged(CharSequence c, int start, int before, int count) {
+                HighScoreList.currUsername = c.toString();
+            }
+
+            public void beforeTextChanged(CharSequence c, int start, int count, int after) {
+                // this space intentionally left blank
+            }
+
+            public void afterTextChanged(Editable c) {
+                // this one too
+            }
+
+        });
+
+        //HighScoreList.currUsername = editText.getText().toString();
         configureButtons();
     }
 
