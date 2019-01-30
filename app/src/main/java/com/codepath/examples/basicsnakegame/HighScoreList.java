@@ -1,7 +1,12 @@
 package com.codepath.examples.basicsnakegame;
 
+import android.support.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -18,7 +23,7 @@ public class HighScoreList {
     private static String currUsername = "";
     private static int currScore = 0;
     private static int numPlayer = 1;
-    //private DatabaseReference mDatabase;
+    private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     /**
      * Populates the high score list with default players.
      */
@@ -56,7 +61,6 @@ public class HighScoreList {
             if (currScore > score) {
 
                 Player newPlayer = new Player(numPlayer++, currUsername, currScore);
-                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference player = mDatabase.child("Player");
                 player.push().setValue(newPlayer);
 
@@ -66,6 +70,18 @@ public class HighScoreList {
             }
         }
 
+    }
+
+    public static void updateList(Player player) {
+        System.out.println(player.toString());
+        for (int i = 0; i < MAX_SIZE; i++) {
+            int score = highScoreList.get(i).getScore();
+            if (player.getScore() > score) {
+                highScoreList.add(i,player);
+                highScoreList.remove(MAX_SIZE);
+                break;
+            }
+        }
     }
 
 

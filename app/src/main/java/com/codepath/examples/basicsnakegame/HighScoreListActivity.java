@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,8 +13,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.app.ListActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * https://examples.javacodegeeks.com/android/core/app/listactivity/android-listactivity-example/
@@ -24,23 +28,13 @@ public class HighScoreListActivity extends ListActivity {
     private TextView text;
     private List<String> listValues;
 
-    private DatabaseReference mDatabase;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_high_score_list);
 
-        //gets root reference
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
         text = (TextView) findViewById(R.id.mainText);
-
-        //Initialize the high score list
-        if (!HighScoreList.isPopulated()) {
-            HighScoreList.populateList();
-        }
 
         //Add the new score to the high score list if it makes the cut
         HighScoreList.addNewHighScore();
