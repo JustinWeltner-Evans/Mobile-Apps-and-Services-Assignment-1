@@ -35,4 +35,15 @@
         android:layout_marginBottom="62dp"
         android:layout_alignBottom="@+id/playAgain"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Username"
+        android:layout_marginBottom="62dp"
+        android:layout_alignBottom="@+id/scoreList"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
